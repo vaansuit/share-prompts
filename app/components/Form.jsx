@@ -11,10 +11,13 @@ const Form = ({ type, post, setPost, submitting, handleSubmit } ) => {
           {type} and share amazing prompts with the world
           showing your awesome discoveries!
         </p>
+        <form 
+          onSubmit={handleSubmit}
+          className="mt-10 w-full max-w-2x1 flex flex-col gap-7 glassmorphism">
         <span className="font-satoshi font-semibold text-base text-gray-700">
           Your AI Prompt!
         </span>
-        <label className="w-full">
+        <label>
         <textarea 
           value={post.prompt}
           onChange={(e) => setPost ({...post, prompt: e.target.value })}
@@ -27,7 +30,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit } ) => {
           Tag {` `}
           <span className="font-normal">(#product, #webdev, #nextJS)</span>
         </span>
-        <label className="w-full mb-5">
+        <label>
         <input 
           value={post.tag}
           onChange={(e) => setPost ({...post, tag: e.target.value })}
@@ -36,7 +39,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit } ) => {
         />
         </label>
         <div className="flex-end mx-3 mb-5 gap-4 w-full">
-          <Link href="/" className="text-gray-500 text-sm">
+          <Link href='/' className="text-gray-500 text-sm">
           Cancel
           </Link>
 
@@ -45,10 +48,10 @@ const Form = ({ type, post, setPost, submitting, handleSubmit } ) => {
             disabled={submitting}
             className="px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white"
           >
-            {submitting ? `${type}...`: type}
+            {submitting ? `${type}ing...`: type}
           </button>
         </div>
-        
+        </form>
     </section>
   )
 }
