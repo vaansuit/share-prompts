@@ -2,7 +2,6 @@ import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import User from '@models/user'
 import { connectToDB } from '@utils/database'
-import { isRedirectError } from '@node_modules/next/dist/client/components/redirect-error'
 
 
 
@@ -26,6 +25,8 @@ const handler = NextAuth({
         })
 
         session.user.id = sessionUser._id.toString();
+
+        return session;
     },
 
     async signIn({ profile }) {
@@ -55,3 +56,5 @@ const handler = NextAuth({
     },
 
 })
+
+export { handler as GET, handler as POST };
