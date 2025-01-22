@@ -4,13 +4,12 @@ import Prompt from '@models/prompt';
 export const GET = async (request, { params }) => {
     try {
         await connectToDB();
-
-        const prompt = await Prompt.findById(params.id).populate('creator');
+        const {id} = await params;
+        const prompt = await Prompt.findById(id).populate('creator');
         if(!prompt) return new Response ("Prompt not found", { status:404 })
 
         return new Response(JSON.stringify(prompt), { status: 200 })
     } catch (error) {
-        console.log(error);
         return new Response ("Failed to fetch prompt", { status: 500 })
     }
 }
@@ -20,10 +19,9 @@ export const PATCH = async (request, { params }) => {
 
     try {
         await connectToDB();
-
-        const existingPrompt = await Prompt.findById(params.id);
-
-        if(!existingPrompt) return new Response ("Prompt not f0und!", { statuas: 404 })
+        const { id } = await params;
+        const existingPrompt = await Prompt.findById(id);
+        if(!existingPrompt) return new Response ("Prompt not f0und!", { status: 404 })
 
         existingPrompt.prompt = prompt;
         existingPrompt.tag = tag;
@@ -36,11 +34,11 @@ export const PATCH = async (request, { params }) => {
     }
 }
 
-export const DELETE = async (request, { parames }) => {
+export const DELETE = async (request, { params }) => {
     try {
         await connectToDB();
-
-        await Prompt.findByIdAndRemove(params.id);
+        const { id } = await params;
+        await Prompt.findByIdAndDelete(id);
 
         return new Response("Prompt deleted! ", { status: 200 })
     } catch (error) {

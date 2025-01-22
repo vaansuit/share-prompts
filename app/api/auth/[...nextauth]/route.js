@@ -5,10 +5,6 @@ import { connectToDB } from '@utils/database'
 
 
 
-// console.log(
-//     {clientId: process.env.GOOGLE_ID,
-//     clientSecret: process.env.GOOGLE_CLIENT_SECRET,}
-// )
 
 
 const handler = NextAuth({
@@ -51,7 +47,6 @@ const handler = NextAuth({
     
             return true;
             } catch (error) {
-               console.log(error)
                return false; 
             }
         },
